@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {Button, StyleSheet, TextInput, View, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
+import {StyleSheet, TextInput, View, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-const TodoInsert = ({onAddTodo}) => {
+const TodoInsert = ({onAddTodo, onReadFromDB}) => {
   
   const [newTodoItem, setNewTodoItem] = useState('');
 
@@ -12,6 +12,7 @@ const TodoInsert = ({onAddTodo}) => {
 
   const addTodoHandler = () => {
     onAddTodo(newTodoItem);
+    onReadFromDB();
     setNewTodoItem('');
   };
 

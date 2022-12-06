@@ -2,17 +2,29 @@ import React, {useState} from 'react';
 import {SafeAreaView, View, Text, StyleSheet} from 'react-native';
 import TodoInsert from '../Components/TodoInsert';
 import TodoList from '../Components/TodoList';
+import  {db}  from '../firebaseConfig';
+import { 
+  addDoc, 
+  collection, 
+ } from "firebase/firestore"; 
 
 const Home = () => {
 
     const [todos, setTodos] = useState([]);
   
-    const addTodo = (text) => {
+    const addTodo = async (text) => {
       // id, 텍스트, 체크 여부
       setTodos([
         ...todos,
         {id: Math.random().toString(), textValue: text, checked: false},
       ]);
+      try{
+        await addDoc(collection(db, 'memo'), {
+          todos: todos
+        });
+      }catch(error) {
+        console.log(error.message)
+      }
     };
   
     // 커링함수: 다중 인수를 갖는 함수를 단일 인수를 갖는 함수들의 함수열로 바꾸는 것
@@ -45,11 +57,11 @@ const Home = () => {
       <SafeAreaView style={styles.container}>
         <View style={styles.card}>
           <TodoList  todos={todos} onRemove={onRemove} onToggle={onToggle} />
-          <TodoInsert onAddTodo={addTodo} />
+          <TodoInsert onAddTodo={addTodo}/>
         </View>
       </SafeAreaView>
     );
-  };
+  }
   
   const styles = StyleSheet.create({
     container: {
