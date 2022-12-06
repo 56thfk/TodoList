@@ -16,16 +16,6 @@ const TodoListItem = ({textValue, id, checked, onRemove, onToggle}) => {
     );
   }
 
-  const LeftActions = () => {
-    return(
-      <TouchableOpacity>
-        <View style={styles.rightAction}>
-          <Text style={styles.actionText}>Hello</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  }
-
   return (
     <View style={styles.container}>
       <TouchableOpacity onPressOut={onToggle(id)}>
@@ -51,14 +41,6 @@ const TodoListItem = ({textValue, id, checked, onRemove, onToggle}) => {
           {textValue}
         </Text>
       </Swipeable>
-      
-      {/* <View style={styles.buttons}>
-        <TouchableOpacity style={styles.buttonContainer}>
-          { <Text style={styles.buttonText} onPress={onRemove(id)}>
-            <Icon name="close" size={30} color="black" />
-          </Text> }
-        </TouchableOpacity>
-      </View> */}
     </View>
   );
 };
