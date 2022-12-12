@@ -12,7 +12,6 @@ const TodoInsert = ({onAddTodo, onReadFromDB}) => {
 
   const addTodoHandler = () => {
     onAddTodo(newTodoItem);
-    onReadFromDB();
     setNewTodoItem('');
   };
 
